@@ -1,0 +1,46 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import ImageConverter from '@/components/tools/image-converter/ImageConverter';
+
+const tool = getToolBySlug('image-converter')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <ImageConverter client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Image Converter?</h2>
+    <p class="text-muted-foreground mb-4">Image Converter transforms images between PNG, JPEG, and WebP formats entirely in your browser using the Canvas API. Adjust quality, resize dimensions, and compare file sizes — all without uploading a single byte to any server.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Drop an image or click to select a file from your device</li>
+      <li>Choose the output format (PNG, JPEG, or WebP) and adjust quality if applicable</li>
+      <li>Optionally resize the image by entering new dimensions</li>
+      <li>Click Convert and download the result</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Converting PNG screenshots to JPEG or WebP to reduce file size for web publishing</li>
+      <li>Batch-resizing images for thumbnails or social media uploads</li>
+      <li>Switching from legacy formats to modern WebP for better compression</li>
+      <li>Quick format conversion without installing desktop software</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser using the Canvas API. Your images are never uploaded to any server. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
+</ToolLayout>

@@ -1,0 +1,45 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import ExifViewer from '@/components/tools/exif-viewer/ExifViewer';
+
+const tool = getToolBySlug('exif-viewer')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <ExifViewer client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is EXIF Viewer & Stripper?</h2>
+    <p class="text-muted-foreground mb-4">EXIF Viewer & Stripper reads and displays the hidden metadata embedded in your photos — including GPS coordinates, camera model, date taken, and exposure settings. More importantly, it lets you strip all this metadata before sharing images online, protecting your privacy.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Drop an image or click to select a photo from your device</li>
+      <li>Review the EXIF metadata displayed in organized categories</li>
+      <li>Click "Strip EXIF & Download" to remove all metadata and save a clean copy</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Removing GPS location data before sharing photos on social media or forums</li>
+      <li>Inspecting camera settings and shooting parameters for photography learning</li>
+      <li>Stripping identifying metadata before anonymous submissions or whistleblowing</li>
+      <li>Checking what personal information is embedded in images before publishing</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your images are never uploaded to any server. The EXIF stripping uses the Canvas API to redraw the image from scratch, completely removing all metadata. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
+</ToolLayout>

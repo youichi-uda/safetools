@@ -1,0 +1,45 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import QrCodeGenerator from '@/components/tools/qr-code-generator/QrCodeGenerator';
+
+const tool = getToolBySlug('qr-code-generator')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <QrCodeGenerator client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is QR Code Generator?</h2>
+    <p class="text-muted-foreground mb-4">QR Code Generator creates scannable QR codes from any text, URL, or data directly in your browser. QR (Quick Response) codes are two-dimensional barcodes that can be read by smartphone cameras and barcode scanners, making them ideal for sharing links, contact information, Wi-Fi credentials, and more. This tool supports customizable error correction levels, sizing, and color options with instant PNG and SVG downloads.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Enter your text or URL in the content field — the QR code updates in real time</li>
+      <li>Adjust the error correction level, size, and colors to match your needs</li>
+      <li>Download the QR code as a PNG for raster use or SVG for scalable vector graphics</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Adding scannable links to printed marketing materials, business cards, and posters</li>
+      <li>Generating QR codes for Wi-Fi network credentials to share with guests</li>
+      <li>Creating QR codes for app download links, event tickets, or product packaging</li>
+      <li>Embedding QR codes in documentation or presentations for quick access to resources</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All QR code generation happens entirely in your browser using client-side JavaScript. No data is ever sent to any server — your text, URLs, and generated codes remain completely private. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
+</ToolLayout>

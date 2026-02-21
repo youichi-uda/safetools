@@ -1,0 +1,46 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import CsvJsonConverter from '@/components/tools/csv-json-converter/CsvJsonConverter';
+
+const tool = getToolBySlug('csv-json-converter')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <CsvJsonConverter client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is CSV ↔ JSON Converter?</h2>
+    <p class="text-muted-foreground mb-4">CSV ↔ JSON Converter transforms data between CSV (Comma-Separated Values) and JSON formats in both directions. The built-in parser is fully RFC 4180 compliant, correctly handling quoted fields, embedded commas, newlines, and escaped quotes.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Paste your CSV or JSON data into the corresponding panel</li>
+      <li>Select the conversion direction (CSV → JSON or JSON → CSV)</li>
+      <li>Choose your delimiter and header options</li>
+      <li>Click Convert and copy or download the result</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Converting spreadsheet exports (CSV) into JSON for API consumption</li>
+      <li>Transforming API JSON responses into CSV for analysis in Excel or Google Sheets</li>
+      <li>Migrating data between systems that use different formats</li>
+      <li>Quick data format conversion during development and debugging</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your data is never sent to any server. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
+</ToolLayout>
