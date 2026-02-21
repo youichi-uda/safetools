@@ -18,4 +18,28 @@ const jsonLd = getJsonLdWebApplication(tool);
   currentSlug={tool.slug}
 >
   <Base64EncoderDecoder client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Base64 Encoder/Decoder?</h2>
+    <p class="text-muted-foreground mb-4">Base64 Encoder/Decoder converts text and files to and from Base64 encoding, with full Unicode (UTF-8) support. Base64 is a binary-to-text encoding scheme that represents binary data as an ASCII string, commonly used to embed images, transmit binary data over text-based protocols, and encode credentials.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Enter text directly or drag and drop a file into the input area</li>
+      <li>Click Encode to convert to Base64, or Decode to convert from Base64 back to its original form</li>
+      <li>Copy the result to your clipboard for use in your project</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Encoding images for inline data URIs in CSS or HTML to reduce HTTP requests</li>
+      <li>Decoding Base64-encoded API responses or JWT token payloads</li>
+      <li>Embedding binary data (PDFs, images, fonts) directly in JSON or XML payloads</li>
+      <li>Encoding credentials for HTTP Basic Authentication headers</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your data is never sent to any server. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
 </ToolLayout>

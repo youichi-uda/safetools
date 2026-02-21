@@ -130,6 +130,36 @@ export const tools: Tool[] = [
     metaTitle: 'UUID Generator - SafeTools.dev',
     metaDescription: 'Generate random UUID v4 online. Bulk generation and formatting. Your data never leaves your browser.',
   },
+  {
+    slug: 'timestamp-converter',
+    name: 'Timestamp Converter',
+    shortName: 'Timestamp',
+    description: 'Convert between Unix timestamps and human-readable dates. Supports seconds and milliseconds.',
+    category: 'Converters',
+    icon: '',
+    metaTitle: 'Unix Timestamp Converter - SafeTools.dev',
+    metaDescription: 'Convert Unix timestamps to dates and dates to timestamps online. Your data never leaves your browser.',
+  },
+  {
+    slug: 'text-case-converter',
+    name: 'Text Case Converter',
+    shortName: 'Case Converter',
+    description: 'Convert text between camelCase, snake_case, PascalCase, kebab-case, UPPER CASE, and more.',
+    category: 'Converters',
+    icon: 'Aa',
+    metaTitle: 'Text Case Converter - SafeTools.dev',
+    metaDescription: 'Convert text between camelCase, snake_case, PascalCase and more online. Your data never leaves your browser.',
+  },
+  {
+    slug: 'lorem-ipsum-generator',
+    name: 'Lorem Ipsum Generator',
+    shortName: 'Lorem Ipsum',
+    description: 'Generate placeholder text in paragraphs, sentences, or words with customizable options.',
+    category: 'Generators',
+    icon: 'Lp',
+    metaTitle: 'Lorem Ipsum Generator - SafeTools.dev',
+    metaDescription: 'Generate Lorem Ipsum placeholder text online. Paragraphs, sentences, or words. Your data never leaves your browser.',
+  },
 ];
 
 export const categories = [...new Set(tools.map((t) => t.category))];

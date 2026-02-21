@@ -18,4 +18,28 @@ const jsonLd = getJsonLdWebApplication(tool);
   currentSlug={tool.slug}
 >
   <DiffChecker client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Diff Checker?</h2>
+    <p class="text-muted-foreground mb-4">Diff Checker compares two pieces of text and highlights the differences at character, word, or line level. It offers both split (side-by-side) and unified views, making it easy to spot exactly what changed between two versions of a file, configuration, or document.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Paste the original text into the left editor panel</li>
+      <li>Paste the modified text into the right editor panel</li>
+      <li>Choose your preferred diff mode (character, word, or line) and view style (split or unified)</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Comparing two versions of source code to review changes before committing</li>
+      <li>Reviewing configuration file changes across environments (staging vs. production)</li>
+      <li>Checking document revisions to see what an editor or collaborator modified</li>
+      <li>Debugging unexpected output by comparing expected vs. actual results</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your data is never sent to any server. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
 </ToolLayout>

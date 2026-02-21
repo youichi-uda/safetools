@@ -18,4 +18,28 @@ const jsonLd = getJsonLdWebApplication(tool);
   currentSlug={tool.slug}
 >
   <UuidGenerator client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is UUID Generator?</h2>
+    <p class="text-muted-foreground mb-4">UUID Generator creates cryptographically random v4 UUIDs using the Web Crypto API, with support for bulk generation, formatting options (uppercase, hyphens, braces), and a persistent generation history. Version 4 UUIDs are the most widely used variant, offering 122 bits of randomness and a collision probability so low it's effectively zero for any practical workload.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Click Generate for a single UUID, or set a count and generate in bulk</li>
+      <li>Choose your preferred format — uppercase, with or without hyphens, wrapped in braces</li>
+      <li>Click any UUID to copy it to your clipboard, or download bulk results as a text file</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Generating unique primary keys for database records during development</li>
+      <li>Creating batches of test data with random identifiers</li>
+      <li>Producing correlation IDs for tracing requests across distributed systems</li>
+      <li>Generating unique keys for configuration files, feature flags, or API tokens</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser using the Web Crypto API for true cryptographic randomness. No data is ever sent to any server, and generated UUIDs are never logged or stored externally. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
 </ToolLayout>

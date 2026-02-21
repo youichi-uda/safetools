@@ -18,4 +18,28 @@ const jsonLd = getJsonLdWebApplication(tool);
   currentSlug={tool.slug}
 >
   <UrlEncoderDecoder client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is URL Encoder/Decoder?</h2>
+    <p class="text-muted-foreground mb-4">URL Encoder/Decoder encodes and decodes URL components using standard JavaScript functions (encodeURIComponent and encodeURI), correctly handling special characters in query strings and path segments. It supports both component-level encoding for individual parameters and full URL encoding for complete addresses.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Choose between component mode (for query parameters) or full URL mode (for complete URLs)</li>
+      <li>Paste your URL or text containing special characters into the input field</li>
+      <li>Click Encode to percent-encode the text, or Decode to convert it back to readable form</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Encoding query parameters that contain spaces, ampersands, or other reserved characters</li>
+      <li>Fixing broken URLs that contain unescaped special characters or Unicode</li>
+      <li>Decoding percent-encoded strings from server logs or API responses</li>
+      <li>Building dynamic URLs with user-supplied values in web applications</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your data is never sent to any server. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
 </ToolLayout>

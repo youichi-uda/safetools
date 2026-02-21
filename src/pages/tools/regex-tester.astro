@@ -18,4 +18,28 @@ const jsonLd = getJsonLdWebApplication(tool);
   currentSlug={tool.slug}
 >
   <RegexTester client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Regex Tester?</h2>
+    <p class="text-muted-foreground mb-4">Regex Tester lets you write and test regular expressions with real-time matching, capture group display, flag toggles, and a replace function. Matches are highlighted directly in your test string so you can see exactly what your pattern captures. It uses your browser's native JavaScript regex engine, so the behavior matches what you'll get in production code.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Enter your regex pattern and select flags (global, case-insensitive, multiline, etc.)</li>
+      <li>Type or paste your test string into the input area</li>
+      <li>View highlighted matches and capture groups in real-time, and optionally test replacement patterns</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Building and debugging regular expressions before adding them to your codebase</li>
+      <li>Testing input validation patterns for forms, emails, URLs, and phone numbers</li>
+      <li>Extracting structured data from log files, CSVs, or unstructured text</li>
+      <li>Learning regex syntax with instant visual feedback on matches and groups</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your data is never sent to any server. This means you can safely test patterns against sensitive data like log files or production text. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
 </ToolLayout>

@@ -18,4 +18,28 @@ const jsonLd = getJsonLdWebApplication(tool);
   currentSlug={tool.slug}
 >
   <MarkdownPreview client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Markdown Preview?</h2>
+    <p class="text-muted-foreground mb-4">Markdown Preview provides a real-time side-by-side editor and preview for GitHub Flavored Markdown, supporting headings, lists, tables, code blocks with syntax highlighting, task lists, and more. It renders your Markdown exactly as it would appear on GitHub, so you can draft and polish content before committing it.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Write or paste your Markdown into the editor panel on the left</li>
+      <li>See the rendered HTML preview update in real-time on the right</li>
+      <li>Copy the generated HTML output or download your work as a <code>.md</code> or <code>.html</code> file</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Drafting and polishing README files for open-source projects</li>
+      <li>Previewing documentation pages before publishing to a docs site</li>
+      <li>Writing blog posts or articles in Markdown with instant visual feedback</li>
+      <li>Composing GitHub issues, pull request descriptions, and wiki pages</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your data is never sent to any server. You can safely preview internal documentation and sensitive content without worry. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
 </ToolLayout>

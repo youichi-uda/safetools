@@ -1,0 +1,47 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import LoremIpsumGenerator from '@/components/tools/lorem-ipsum-generator/LoremIpsumGenerator';
+
+const tool = getToolBySlug('lorem-ipsum-generator')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <LoremIpsumGenerator client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Lorem Ipsum?</h2>
+    <p class="text-muted-foreground mb-4">Lorem Ipsum is placeholder text used in design, publishing, and web development to fill layouts before final content is ready. Originating from a scrambled passage of Cicero's "De Finibus Bonorum et Malorum" (45 BC), it provides a natural-looking text distribution without distracting from the visual design. This tool generates customizable Lorem Ipsum text instantly.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Choose the output type: paragraphs, sentences, or words</li>
+      <li>Set the number of units to generate (1–100)</li>
+      <li>Optionally start with the classic "Lorem ipsum dolor sit amet..." opening</li>
+      <li>Enable HTML paragraph tags if you need markup-ready output</li>
+      <li>Click Generate, then copy or download the result</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Filling wireframes and mockups with realistic-looking text during UI design</li>
+      <li>Testing responsive layouts with varying amounts of content</li>
+      <li>Populating database seed data for development and testing environments</li>
+      <li>Creating placeholder content for blog templates and CMS themes</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All text generation happens entirely in your browser. No data is sent to any server.</p>
+  </section>
+</ToolLayout>

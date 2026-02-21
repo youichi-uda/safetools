@@ -1,0 +1,45 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import TextCaseConverter from '@/components/tools/text-case-converter/TextCaseConverter';
+
+const tool = getToolBySlug('text-case-converter')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <TextCaseConverter client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Text Case Converter?</h2>
+    <p class="text-muted-foreground mb-4">Text Case Converter transforms text between common naming conventions used in programming and writing. Convert between camelCase, PascalCase, snake_case, kebab-case, CONSTANT_CASE, Title Case, UPPER CASE, lower case, and more — all instantly in your browser.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Paste or type your text into the input field</li>
+      <li>Click any case conversion button to transform your text</li>
+      <li>Copy the result to your clipboard with one click</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Converting variable names between JavaScript (camelCase) and Python (snake_case) conventions</li>
+      <li>Generating CSS class names in kebab-case from component names</li>
+      <li>Creating CONSTANT_CASE names for environment variables and configuration keys</li>
+      <li>Formatting titles and headings with proper Title Case capitalization</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All text transformations happen entirely in your browser. Your data is never sent to any server.</p>
+  </section>
+</ToolLayout>

@@ -18,4 +18,28 @@ const jsonLd = getJsonLdWebApplication(tool);
   currentSlug={tool.slug}
 >
   <ColorConverter client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Color Converter?</h2>
+    <p class="text-muted-foreground mb-4">Color Converter translates colors between HEX, RGB, HSL, and OKLCH formats with a live visual preview, native color picker, and a built-in WCAG contrast accessibility checker. Whether you're converting design tokens from Figma into CSS custom properties or checking that your text passes accessibility guidelines, this tool handles the math so you don't have to.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Enter a color in any supported format (HEX, RGB, HSL, OKLCH) or use the native color picker</li>
+      <li>All other color formats update automatically in real-time</li>
+      <li>Check contrast ratios against background colors for WCAG AA and AAA compliance</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Converting design tokens between HEX, RGB, HSL, and OKLCH for CSS stylesheets</li>
+      <li>Checking text and background color combinations against WCAG 2.1 accessibility standards</li>
+      <li>Exploring color variations by adjusting HSL lightness or OKLCH chroma values</li>
+      <li>Translating colors from Figma, Sketch, or Adobe XD into production-ready CSS</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your data is never sent to any server. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
 </ToolLayout>

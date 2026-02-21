@@ -1,0 +1,46 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import TimestampConverter from '@/components/tools/timestamp-converter/TimestampConverter';
+
+const tool = getToolBySlug('timestamp-converter')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <TimestampConverter client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is a Unix Timestamp?</h2>
+    <p class="text-muted-foreground mb-4">A Unix timestamp (also called Epoch time or POSIX time) is the number of seconds that have elapsed since January 1, 1970 00:00:00 UTC. It's a universal way to represent a point in time as a single integer, used widely in programming, databases, APIs, and log files. This tool converts between Unix timestamps and human-readable date formats instantly.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Enter a Unix timestamp (in seconds or milliseconds) to see the corresponding date and time</li>
+      <li>Or use the date/time picker to generate a Unix timestamp from a specific date</li>
+      <li>Click "Now" to fill in the current time instantly</li>
+      <li>Copy any output value with one click using the copy buttons</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Debugging API responses that return timestamps as integers</li>
+      <li>Converting log file timestamps to readable dates for incident analysis</li>
+      <li>Generating Unix timestamps for database queries and cron job scheduling</li>
+      <li>Checking token expiration times in JWT payloads or OAuth flows</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All timestamp conversions happen entirely in your browser using the native JavaScript Date API. No data is sent to any server.</p>
+  </section>
+</ToolLayout>

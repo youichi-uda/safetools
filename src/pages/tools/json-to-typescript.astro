@@ -18,4 +18,28 @@ const jsonLd = getJsonLdWebApplication(tool);
   currentSlug={tool.slug}
 >
   <JsonToTypescript client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is JSON to TypeScript?</h2>
+    <p class="text-muted-foreground mb-4">JSON to TypeScript automatically generates TypeScript interfaces or type aliases from JSON data, handling nested objects, arrays, optional fields, and mixed types. Instead of manually writing type definitions for API responses, paste the JSON and get accurate, ready-to-use TypeScript types in seconds.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Paste your JSON data into the input editor</li>
+      <li>Configure options such as interface vs. type alias, export keywords, and root type name</li>
+      <li>Click Convert and copy the generated TypeScript definitions into your project</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Bootstrapping TypeScript types from REST or GraphQL API responses</li>
+      <li>Generating type definitions for JSON configuration files</li>
+      <li>Converting mock data or fixtures into type-safe interfaces for testing</li>
+      <li>Speeding up TypeScript development by eliminating manual type authoring</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your data is never sent to any server. This is particularly important when working with API responses that may contain proprietary data structures. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
 </ToolLayout>

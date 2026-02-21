@@ -18,4 +18,28 @@ const jsonLd = getJsonLdWebApplication(tool);
   currentSlug={tool.slug}
 >
   <HashGenerator client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Hash Generator?</h2>
+    <p class="text-muted-foreground mb-4">Hash Generator computes cryptographic hashes from text or files using the Web Crypto API and a lightweight MD5 implementation. It supports MD5, SHA-1, SHA-256, and SHA-512 algorithms, producing fixed-length fingerprints that uniquely represent your input data.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Enter text directly or select a file to hash</li>
+      <li>Click Generate Hashes to compute all supported hash algorithms at once</li>
+      <li>Copy individual hash values using the copy button next to each result</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Verifying file integrity by comparing checksums after downloads or transfers</li>
+      <li>Generating content fingerprints to detect duplicate files or data</li>
+      <li>Comparing file versions to confirm whether two copies are identical</li>
+      <li>Creating cache-busting keys for static assets in web applications</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your data is never sent to any server. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
 </ToolLayout>

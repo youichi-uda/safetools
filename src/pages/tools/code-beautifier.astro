@@ -18,4 +18,28 @@ const jsonLd = getJsonLdWebApplication(tool);
   currentSlug={tool.slug}
 >
   <CodeBeautifier client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Code Beautifier?</h2>
+    <p class="text-muted-foreground mb-4">Code Beautifier formats and beautifies source code in 8+ languages using Prettier, the industry-standard code formatter. It supports JavaScript, TypeScript, CSS, HTML, JSON, YAML, Markdown, and GraphQL — all powered by Prettier plugins loaded directly in your browser.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Select your programming language from the dropdown</li>
+      <li>Paste your unformatted code into the editor</li>
+      <li>Click Format to beautify the code with Prettier's opinionated formatting rules</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Formatting minified JavaScript or CSS back into human-readable code</li>
+      <li>Standardizing code style before pasting into documentation or blog posts</li>
+      <li>Cleaning up inconsistently indented code copied from Stack Overflow or GitHub</li>
+      <li>Quickly reformatting YAML or JSON configuration files</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your data is never sent to any server. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
 </ToolLayout>

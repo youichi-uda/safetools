@@ -18,4 +18,28 @@ const jsonLd = getJsonLdWebApplication(tool);
   currentSlug={tool.slug}
 >
   <JwtDecoder client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is JWT Decoder?</h2>
+    <p class="text-muted-foreground mb-4">JWT Decoder splits a JSON Web Token into its three parts — header, payload, and signature — decodes the Base64URL-encoded data, and displays the contents with color coding and expiration status. JWTs are the standard token format used across OAuth 2.0, OpenID Connect, and most modern API authentication systems, and being able to quickly inspect one is an essential part of any developer's debugging workflow.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Paste your JWT token into the input field</li>
+      <li>View the decoded header, payload, and signature instantly with syntax highlighting</li>
+      <li>Check the expiration status and copy individual sections as needed</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Debugging authentication flows by inspecting token claims like <code>sub</code>, <code>aud</code>, and <code>iss</code></li>
+      <li>Verifying token expiration times to troubleshoot 401 errors</li>
+      <li>Reviewing permissions and roles embedded in access tokens</li>
+      <li>Understanding JWT structure when integrating with third-party APIs</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your data is never sent to any server. This is especially important for JWTs, which often contain sensitive user information and credentials. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
 </ToolLayout>

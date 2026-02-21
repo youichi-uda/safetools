@@ -18,4 +18,28 @@ const jsonLd = getJsonLdWebApplication(tool);
   currentSlug={tool.slug}
 >
   <JsonFormatter client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is JSON Formatter?</h2>
+    <p class="text-muted-foreground mb-4">JSON Formatter validates, formats (pretty-prints), and minifies JSON data with configurable indentation. Whether you're working with a compact API response or a sprawling configuration file, this tool transforms raw JSON into a clean, readable structure — or compresses it down to a single line for production use.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Paste your JSON into the editor or drag and drop a .json file</li>
+      <li>Click Format to pretty-print, Minify to compress, or Validate to check for syntax errors</li>
+      <li>Copy the result to your clipboard or download it as a file</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Debugging API responses by expanding minified JSON into a readable format</li>
+      <li>Validating JSON payloads before sending them to an endpoint</li>
+      <li>Cleaning up configuration files for version control readability</li>
+      <li>Minifying JSON data to reduce file size for production deployments</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your data is never sent to any server. You can verify this by checking the network tab in your browser's developer tools — you'll see zero outbound requests.</p>
+  </section>
 </ToolLayout>
