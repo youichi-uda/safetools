@@ -1,0 +1,20 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import UrlEncoderDecoder from '@/components/tools/url-encoder-decoder/UrlEncoderDecoder';
+
+const tool = getToolBySlug('url-encoder-decoder')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <UrlEncoderDecoder client:load />
+</ToolLayout>
