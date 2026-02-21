@@ -1,0 +1,46 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import LlmTokenCounter from '@/components/tools/llm-token-counter/LlmTokenCounter';
+
+const tool = getToolBySlug('llm-token-counter')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <LlmTokenCounter client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is LLM Token Counter?</h2>
+    <p class="text-muted-foreground mb-4">LLM Token Counter counts the number of tokens in your text using the same tokenization algorithm (cl100k_base) used by GPT-4 and other large language models. See real-time token counts, estimated API costs, and context window usage — all without sending your prompts to any server.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Paste or type your text into the input area</li>
+      <li>Select the LLM model to see model-specific costs and context limits</li>
+      <li>View the token count, estimated cost, and context window usage in real time</li>
+      <li>Toggle token visualization to see how your text is split into tokens</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Estimating API costs before sending prompts to GPT-4 or Claude</li>
+      <li>Checking if prompts fit within context window limits</li>
+      <li>Optimizing prompt engineering by reducing token count</li>
+      <li>Understanding how different text formats affect tokenization</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All tokenization happens entirely in your browser. Your prompts, API calls, and sensitive data are never sent to any server — which is exactly how a token counter for LLM prompts should work.</p>
+  </section>
+</ToolLayout>

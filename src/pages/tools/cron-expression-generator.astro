@@ -1,0 +1,46 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import CronExpressionGenerator from '@/components/tools/cron-expression-generator/CronExpressionGenerator';
+
+const tool = getToolBySlug('cron-expression-generator')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <CronExpressionGenerator client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Cron Expression Generator?</h2>
+    <p class="text-muted-foreground mb-4">Cron Expression Generator helps you build and test cron scheduling expressions with a visual editor. See human-readable descriptions, preview next execution times, and use common presets for CI/CD pipelines, GitHub Actions, cloud schedulers, and system crontabs.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Use the visual builder to select values for each cron field, or type an expression directly</li>
+      <li>Review the human-readable description and upcoming run times</li>
+      <li>Use preset buttons for common schedules, then customize as needed</li>
+      <li>Copy the expression for use in your crontab, CI/CD config, or scheduler</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Setting up scheduled GitHub Actions workflows or GitLab CI pipelines</li>
+      <li>Configuring cloud scheduler jobs (AWS EventBridge, Google Cloud Scheduler)</li>
+      <li>Writing system crontab entries for backups, log rotation, or maintenance tasks</li>
+      <li>Testing and debugging existing cron expressions to verify next run times</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. No data is sent to any server.</p>
+  </section>
+</ToolLayout>

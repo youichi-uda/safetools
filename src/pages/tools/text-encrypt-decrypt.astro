@@ -1,0 +1,45 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import TextEncryptDecrypt from '@/components/tools/text-encrypt-decrypt/TextEncryptDecrypt';
+
+const tool = getToolBySlug('text-encrypt-decrypt')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <TextEncryptDecrypt client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Text Encrypt / Decrypt?</h2>
+    <p class="text-muted-foreground mb-4">Text Encrypt / Decrypt uses AES-256-GCM encryption with PBKDF2 key derivation to securely encrypt and decrypt text using a password — all entirely in your browser via the Web Crypto API. The encrypted output is a portable Base64 string that can be safely shared or stored.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Enter a password and the text you want to encrypt</li>
+      <li>Click Encrypt to get a Base64-encoded ciphertext</li>
+      <li>To decrypt, paste the encrypted text and enter the same password</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Encrypting sensitive notes, API keys, or credentials before storing them</li>
+      <li>Sharing encrypted messages that only the recipient can read</li>
+      <li>Protecting configuration data before committing to version control</li>
+      <li>Creating encrypted backups of passwords or secrets</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All encryption and decryption happens entirely in your browser using the Web Crypto API. Your password and plaintext are never transmitted. The implementation uses AES-256-GCM for authenticated encryption, PBKDF2 with 100,000 iterations for key derivation, and random salt and IV for every encryption operation.</p>
+  </section>
+</ToolLayout>

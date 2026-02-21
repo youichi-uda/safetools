@@ -1,0 +1,45 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import YamlJsonConverter from '@/components/tools/yaml-json-converter/YamlJsonConverter';
+
+const tool = getToolBySlug('yaml-json-converter')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <YamlJsonConverter client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is JSON ↔ YAML Converter?</h2>
+    <p class="text-muted-foreground mb-4">JSON ↔ YAML Converter transforms data between JSON and YAML formats bidirectionally. YAML is the standard format for Kubernetes manifests, Docker Compose files, CI/CD pipelines (GitHub Actions, GitLab CI), and many configuration systems. This tool makes it easy to switch between the two formats while keeping your data private.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Paste your JSON or YAML data into the corresponding panel</li>
+      <li>Select the conversion direction (JSON → YAML or YAML → JSON)</li>
+      <li>Click Convert and copy the result</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Converting Kubernetes YAML manifests to JSON for programmatic manipulation</li>
+      <li>Transforming JSON API responses into YAML for configuration files</li>
+      <li>Working with CI/CD pipelines that require YAML format (GitHub Actions, GitLab CI)</li>
+      <li>Converting Docker Compose or Ansible playbook snippets between formats</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your configuration data, secrets, and API keys are never sent to any server.</p>
+  </section>
+</ToolLayout>

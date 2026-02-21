@@ -1,0 +1,45 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import JsonSchemaGenerator from '@/components/tools/json-schema-generator/JsonSchemaGenerator';
+
+const tool = getToolBySlug('json-schema-generator')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <JsonSchemaGenerator client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is JSON Schema Generator & Validator?</h2>
+    <p class="text-muted-foreground mb-4">JSON Schema Generator automatically creates JSON Schema definitions from sample JSON data, and validates JSON documents against schemas. JSON Schema is the standard for describing the structure of JSON data, used in OpenAPI specs, form validation, and data contracts.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Switch between Generate and Validate modes using the tabs</li>
+      <li>To generate: paste sample JSON and click Generate Schema</li>
+      <li>To validate: paste a JSON Schema and your data, then click Validate</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Generating JSON Schema for OpenAPI/Swagger API specifications</li>
+      <li>Validating API request/response payloads against a contract</li>
+      <li>Creating schema definitions for form validation libraries</li>
+      <li>Bootstrapping TypeScript type definitions from schema</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your JSON data and schemas are never sent to any server.</p>
+  </section>
+</ToolLayout>

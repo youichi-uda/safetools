@@ -1,0 +1,46 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import EnvEditor from '@/components/tools/env-editor/EnvEditor';
+
+const tool = getToolBySlug('env-editor')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <EnvEditor client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is .env File Viewer & Editor?</h2>
+    <p class="text-muted-foreground mb-4">.env File Viewer & Editor parses, displays, and edits environment variable files with built-in secret masking. Environment files often contain sensitive data like API keys, database passwords, and tokens — this tool lets you inspect and modify them without ever sending that data to a server.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Paste your .env file content or load the sample data</li>
+      <li>Click Parse to view variables in a structured table with masked values</li>
+      <li>Click the eye icon to reveal individual values, or use Show All</li>
+      <li>Edit values inline, add new variables, or export the modified .env file</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Safely reviewing .env files without accidentally exposing secrets on screen</li>
+      <li>Comparing and editing environment configs across development, staging, and production</li>
+      <li>Validating .env files for duplicate keys or missing values before deployment</li>
+      <li>Onboarding new team members by providing a masked view of required environment variables</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your environment variables, API keys, and passwords are never sent to any server. This is especially critical for .env files which contain the most sensitive configuration data in any project.</p>
+  </section>
+</ToolLayout>

@@ -1,0 +1,45 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import IpSubnetCalculator from '@/components/tools/ip-subnet-calculator/IpSubnetCalculator';
+
+const tool = getToolBySlug('ip-subnet-calculator')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <IpSubnetCalculator client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is IP / Subnet Calculator?</h2>
+    <p class="text-muted-foreground mb-4">IP / Subnet Calculator computes network details from an IPv4 address and CIDR prefix. Instantly see the network address, broadcast address, subnet mask, host range, and total usable hosts — essential for configuring VPCs, firewall rules, and network segmentation.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Enter an IPv4 address (e.g. 192.168.1.0) and CIDR prefix (e.g. /24)</li>
+      <li>View the calculated network details including host range and subnet mask</li>
+      <li>Use the cheat sheet for quick reference on common subnet sizes</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Planning AWS VPC subnets and security group CIDR ranges</li>
+      <li>Configuring Cloudflare, firewall, or load balancer IP allowlists</li>
+      <li>Calculating subnet boundaries for network segmentation</li>
+      <li>Quick reference for CIDR notation during infrastructure setup</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All calculations happen entirely in your browser. Your network configuration details are never sent to any server.</p>
+  </section>
+</ToolLayout>

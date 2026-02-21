@@ -1,0 +1,45 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import OpenapiViewer from '@/components/tools/openapi-viewer/OpenapiViewer';
+
+const tool = getToolBySlug('openapi-viewer')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <OpenapiViewer client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is OpenAPI / Swagger Viewer?</h2>
+    <p class="text-muted-foreground mb-4">OpenAPI / Swagger Viewer renders interactive API documentation from OpenAPI 3.x specifications. Paste your spec in YAML or JSON format and instantly see endpoints, parameters, request bodies, and response schemas in a clean, readable layout — without sending your API spec to any server.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Paste your OpenAPI spec (YAML or JSON) into the editor</li>
+      <li>Click "Parse & View" to render the documentation</li>
+      <li>Click on any endpoint to expand details including parameters and responses</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Quickly previewing OpenAPI specs during API development</li>
+      <li>Reviewing API contracts without deploying a documentation server</li>
+      <li>Sharing API documentation privately without exposing internal specs</li>
+      <li>Debugging and validating OpenAPI spec structure</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your API specifications — which often contain internal endpoints and security details — are never sent to any server.</p>
+  </section>
+</ToolLayout>

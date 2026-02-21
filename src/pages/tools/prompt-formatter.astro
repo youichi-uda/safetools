@@ -1,0 +1,46 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import PromptFormatter from '@/components/tools/prompt-formatter/PromptFormatter';
+
+const tool = getToolBySlug('prompt-formatter')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <PromptFormatter client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Prompt Template Formatter?</h2>
+    <p class="text-muted-foreground mb-4">Prompt Template Formatter helps you create reusable prompt templates with {'{{variables}}'} that can be filled in dynamically. Build a library of prompt templates, fill in the blanks, and copy the result — perfect for standardizing your AI workflow without sending prompts to any server.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Write a template using {'{{variable_name}}'} syntax for dynamic parts</li>
+      <li>Fill in the auto-generated variable fields</li>
+      <li>See the live preview update in real time and copy the result</li>
+      <li>Save templates to your library for reuse (stored in your browser)</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Standardizing prompts across a team for consistent AI outputs</li>
+      <li>Building a personal library of optimized prompt templates</li>
+      <li>Quickly generating variations of prompts with different parameters</li>
+      <li>Creating prompt templates for code review, translation, summarization, and more</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your prompts, templates, and saved library are stored only in localStorage — never on any server. This is critical since prompts often contain proprietary business logic and sensitive instructions.</p>
+  </section>
+</ToolLayout>

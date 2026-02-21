@@ -1,0 +1,45 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import TomlJsonConverter from '@/components/tools/toml-json-converter/TomlJsonConverter';
+
+const tool = getToolBySlug('toml-json-converter')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <TomlJsonConverter client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is TOML ↔ JSON Converter?</h2>
+    <p class="text-muted-foreground mb-4">TOML ↔ JSON Converter transforms data between TOML and JSON formats. TOML is the configuration format used by Rust (Cargo.toml), Python (pyproject.toml), and many modern tools. This converter makes it easy to switch between TOML's human-friendly syntax and JSON's universal format.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Paste your TOML or JSON data into the corresponding panel</li>
+      <li>Select the conversion direction (TOML → JSON or JSON → TOML)</li>
+      <li>Click Convert and copy the result</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Converting Cargo.toml dependencies to JSON for programmatic analysis</li>
+      <li>Migrating pyproject.toml settings between formats</li>
+      <li>Working with Hugo, Deno, or other tools that use TOML configuration</li>
+      <li>Inspecting and modifying TOML configs in a more familiar JSON format</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. Your configuration data is never sent to any server.</p>
+  </section>
+</ToolLayout>
