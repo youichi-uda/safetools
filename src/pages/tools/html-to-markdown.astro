@@ -1,0 +1,46 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import HtmlToMarkdown from '@/components/tools/html-to-markdown/HtmlToMarkdown';
+
+const tool = getToolBySlug('html-to-markdown')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <HtmlToMarkdown client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is HTML to Markdown Converter?</h2>
+    <p class="text-muted-foreground mb-4">HTML to Markdown Converter transforms HTML content into clean Markdown using the Turndown library. It supports configurable heading styles (ATX or Setext), code block formats (fenced or indented), bullet characters, and GitHub Flavored Markdown extensions like tables and strikethrough.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Paste your HTML into the input editor or click Sample for a demo</li>
+      <li>Configure heading style, code block format, bullet character, and GFM support</li>
+      <li>The converted Markdown appears instantly in the output panel</li>
+      <li>Copy the result with one click</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Migrating HTML content from legacy CMS to Markdown-based platforms</li>
+      <li>Converting web pages to Markdown for documentation or note-taking</li>
+      <li>Extracting content from HTML emails into Markdown format</li>
+      <li>Converting HTML documentation to Markdown for Git repositories</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All conversion happens entirely in your browser using the Turndown library. Your HTML content is never sent to any server. You can verify this by checking the network tab in your browser's developer tools.</p>
+  </section>
+</ToolLayout>

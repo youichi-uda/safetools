@@ -1,0 +1,46 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import MarkdownToPdf from '@/components/tools/markdown-to-pdf/MarkdownToPdf';
+
+const tool = getToolBySlug('markdown-to-pdf')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <MarkdownToPdf client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Markdown to PDF Converter?</h2>
+    <p class="text-muted-foreground mb-4">Markdown to PDF Converter renders your Markdown as a formatted PDF document entirely in the browser. Choose from multiple page sizes (A4, Letter, Legal), configure margins and font size, and preview the result before generating the PDF file.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Type or paste your Markdown into the input panel</li>
+      <li>Adjust page size, margin, and font size to your preference</li>
+      <li>Preview the rendered output in the right panel</li>
+      <li>Click "Generate PDF" to create and download the PDF file</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Converting project documentation to PDF for distribution</li>
+      <li>Creating printable reports from Markdown notes</li>
+      <li>Generating PDF invoices or proposals from structured Markdown</li>
+      <li>Archiving Markdown content as universally readable PDF files</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All PDF generation happens entirely in your browser using html2pdf.js. Your Markdown content is never sent to any server. The PDF is generated locally and downloaded directly to your device.</p>
+  </section>
+</ToolLayout>

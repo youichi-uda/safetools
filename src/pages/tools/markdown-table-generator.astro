@@ -1,0 +1,46 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import MarkdownTableGenerator from '@/components/tools/markdown-table-generator/MarkdownTableGenerator';
+
+const tool = getToolBySlug('markdown-table-generator')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <MarkdownTableGenerator client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Markdown Table Generator?</h2>
+    <p class="text-muted-foreground mb-4">Markdown Table Generator lets you create properly formatted Markdown tables using a visual GUI editor. Edit cells directly, add or remove rows and columns, set column alignment (left, center, right), and get perfectly formatted Markdown output in real-time.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Edit table cells directly in the GUI editor — the first row is always the header</li>
+      <li>Use the +/- Row and +/- Column buttons to adjust the table size</li>
+      <li>Click the alignment button on each column to cycle between left, center, and right</li>
+      <li>Copy the generated Markdown from the output panel</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Creating comparison tables for README files and documentation</li>
+      <li>Building feature matrices for project wikis</li>
+      <li>Generating data tables for GitHub issues and pull request descriptions</li>
+      <li>Quickly prototyping table layouts before committing to a document</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All table generation happens entirely in your browser. No data is ever sent to any server. You can verify this by checking the network tab in your browser's developer tools.</p>
+  </section>
+</ToolLayout>

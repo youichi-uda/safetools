@@ -1,0 +1,47 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import MarkdownToHtml from '@/components/tools/markdown-to-html/MarkdownToHtml';
+
+const tool = getToolBySlug('markdown-to-html')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <MarkdownToHtml client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Markdown to HTML Converter?</h2>
+    <p class="text-muted-foreground mb-4">Markdown to HTML Converter transforms Markdown text into clean HTML with support for headings, lists, tables, code blocks, blockquotes, and inline formatting. Choose between a full HTML document (with doctype, head, and body) or a fragment, with optional minification.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Type or paste your Markdown into the input panel</li>
+      <li>Choose Fragment or Full Document output mode</li>
+      <li>Toggle Minify to compress the HTML output</li>
+      <li>Switch between HTML code view and rendered Preview</li>
+      <li>Copy the HTML with one click</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Converting README files to HTML for static sites or email templates</li>
+      <li>Generating HTML snippets from Markdown for CMS content</li>
+      <li>Creating self-contained HTML documents from Markdown notes</li>
+      <li>Previewing how Markdown will render as HTML before publishing</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All conversion happens entirely in your browser. Your Markdown content is never sent to any server. You can verify this by checking the network tab in your browser's developer tools.</p>
+  </section>
+</ToolLayout>

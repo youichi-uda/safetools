@@ -1,0 +1,45 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import SqlFormatter from '@/components/tools/sql-formatter/SqlFormatter';
+
+const tool = getToolBySlug('sql-formatter')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <SqlFormatter client:load />
+
+  <!-- SEO Content -->
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is SQL Formatter?</h2>
+    <p class="text-muted-foreground mb-4">SQL Formatter beautifies and formats SQL queries with support for 12+ SQL dialects including PostgreSQL, MySQL, SQLite, SQL Server (T-SQL), Oracle (PL/SQL), BigQuery, and more. Configure indentation width and keyword casing to match your team's coding standards.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Paste your SQL query into the input editor or click Sample for a demo</li>
+      <li>Select your SQL dialect, indentation width, and keyword case preference</li>
+      <li>The formatted SQL appears instantly in the output panel — copy it with one click</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Use Cases</h2>
+    <ul class="list-disc list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Formatting complex queries from ORM-generated SQL for debugging</li>
+      <li>Standardizing SQL style across a team without a paid IDE like IntelliJ IDEA Ultimate</li>
+      <li>Cleaning up one-liner queries from log files or monitoring tools</li>
+      <li>Preparing SQL for code reviews and documentation</li>
+    </ul>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All formatting happens entirely in your browser. Your SQL queries are never sent to any server — critical for formatting queries that may contain sensitive table names, column names, or data values.</p>
+  </section>
+</ToolLayout>
