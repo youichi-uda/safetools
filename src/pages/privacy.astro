@@ -1,0 +1,51 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout seo={{
+  title: 'Privacy Policy - SafeTools.dev',
+  description: 'SafeTools.dev privacy policy. Your data never leaves your browser. No tracking, no cookies, no data collection.',
+}}>
+  <div class="mx-auto max-w-3xl px-4 py-16">
+    <h1 class="text-3xl font-bold mb-8">Privacy Policy</h1>
+
+    <div class="prose prose-neutral dark:prose-invert max-w-none space-y-6 text-sm leading-relaxed">
+      <p class="text-lg text-muted-foreground">
+        <strong>TL;DR:</strong> Your data never leaves your browser. We don't collect, store, or transmit any of your data. Period.
+      </p>
+
+      <h2 class="text-xl font-semibold mt-8 mb-3">How SafeTools Works</h2>
+      <p>Every tool on SafeTools.dev processes data entirely within your web browser using JavaScript and WebAssembly. When you paste text, upload a file, or use any tool, your data stays on your device. No data is ever sent to our servers or any third party.</p>
+
+      <h2 class="text-xl font-semibold mt-8 mb-3">Technical Verification</h2>
+      <p>We don't just claim privacy — we prove it technically:</p>
+      <ul class="list-disc pl-6 space-y-2">
+        <li><strong>Content Security Policy (CSP)</strong>: Our HTTP headers include <code class="px-1.5 py-0.5 rounded bg-muted font-mono text-xs">connect-src 'self'</code>, which instructs your browser to block any outbound network requests to external servers.</li>
+        <li><strong>No analytics</strong>: We do not use Google Analytics, Mixpanel, or any tracking service.</li>
+        <li><strong>No cookies</strong>: We do not set any cookies. Theme preferences are stored in localStorage only.</li>
+        <li><strong>Verify yourself</strong>: Open your browser's DevTools (F12), go to the Network tab, and use any tool. You'll see zero requests to external servers.</li>
+      </ul>
+
+      <h2 class="text-xl font-semibold mt-8 mb-3">What We Don't Collect</h2>
+      <ul class="list-disc pl-6 space-y-2">
+        <li>Your input data (JSON, code, text, files)</li>
+        <li>Personal information</li>
+        <li>IP addresses</li>
+        <li>Browser fingerprints</li>
+        <li>Usage analytics</li>
+        <li>Cookies or tracking data</li>
+      </ul>
+
+      <h2 class="text-xl font-semibold mt-8 mb-3">Local Storage</h2>
+      <p>We use browser localStorage solely to remember your theme preference (light/dark mode). This data never leaves your browser and can be cleared at any time through your browser settings.</p>
+
+      <h2 class="text-xl font-semibold mt-8 mb-3">Third-Party Services</h2>
+      <p>SafeTools.dev is hosted on Cloudflare Pages. Cloudflare may collect standard web server logs (IP addresses, timestamps) as part of their CDN infrastructure. We have no access to this data and do not request it. No other third-party services are used.</p>
+
+      <h2 class="text-xl font-semibold mt-8 mb-3">Changes</h2>
+      <p>If we ever change this policy, we will update this page. Our core commitment — your data never leaves your browser — will never change.</p>
+
+      <p class="text-muted-foreground mt-8">Last updated: February 2026</p>
+    </div>
+  </div>
+</BaseLayout>

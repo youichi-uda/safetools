@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://safetools.dev/sitemap-index.xml

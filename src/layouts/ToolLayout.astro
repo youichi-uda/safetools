@@ -1,0 +1,26 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ToolSidebar from '@/components/layout/ToolSidebar.astro';
+import PrivacyBadge from '@/components/shared/PrivacyBadge.astro';
+import type { SEOProps } from '@/lib/seo';
+
+interface Props {
+  seo: SEOProps;
+  jsonLd?: string;
+  currentSlug: string;
+}
+
+const { seo, jsonLd, currentSlug } = Astro.props;
+---
+
+<BaseLayout seo={seo} jsonLd={jsonLd}>
+  <div class="flex">
+    <ToolSidebar currentSlug={currentSlug} />
+    <div class="flex-1 min-w-0 p-4 lg:p-6">
+      <div class="mb-4">
+        <PrivacyBadge />
+      </div>
+      <slot />
+    </div>
+  </div>
+</BaseLayout>
