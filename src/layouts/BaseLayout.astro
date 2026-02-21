@@ -11,7 +11,7 @@ interface Props {
 
 const { seo, jsonLd } = Astro.props;
 const canonicalURL = seo.canonical || new URL(Astro.url.pathname, Astro.site).toString();
-const ogImage = seo.ogImage || new URL('/og/default.svg', Astro.site).toString();
+const ogImage = seo.ogImage || new URL('/og/default.png', Astro.site).toString();
 ---
 
 <!doctype html>
