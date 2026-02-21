@@ -100,6 +100,36 @@ export const tools: Tool[] = [
     metaTitle: 'Regex Tester - SafeTools.dev',
     metaDescription: 'Test and debug regular expressions online with real-time matching. Your data never leaves your browser.',
   },
+  {
+    slug: 'markdown-preview',
+    name: 'Markdown Preview',
+    shortName: 'Markdown Preview',
+    description: 'Write and preview GitHub Flavored Markdown in real-time with syntax highlighting and export.',
+    category: 'Formatters',
+    icon: 'MD',
+    metaTitle: 'Markdown Preview - SafeTools.dev',
+    metaDescription: 'Write and preview Markdown online with real-time rendering. GFM support. Your data never leaves your browser.',
+  },
+  {
+    slug: 'json-to-typescript',
+    name: 'JSON to TypeScript',
+    shortName: 'JSON → TS',
+    description: 'Generate TypeScript interfaces and types from JSON data automatically.',
+    category: 'Converters',
+    icon: 'TS',
+    metaTitle: 'JSON to TypeScript - SafeTools.dev',
+    metaDescription: 'Convert JSON to TypeScript interfaces online. Auto-generate types. Your data never leaves your browser.',
+  },
+  {
+    slug: 'uuid-generator',
+    name: 'UUID Generator',
+    shortName: 'UUID Generator',
+    description: 'Generate random UUIDs (v4) with bulk generation, formatting options, and one-click copy.',
+    category: 'Generators',
+    icon: 'ID',
+    metaTitle: 'UUID Generator - SafeTools.dev',
+    metaDescription: 'Generate random UUID v4 online. Bulk generation and formatting. Your data never leaves your browser.',
+  },
 ];
 
 export const categories = [...new Set(tools.map((t) => t.category))];
