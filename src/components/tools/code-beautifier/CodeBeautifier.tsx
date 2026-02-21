@@ -134,7 +134,6 @@ export default function CodeBeautifier() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-1">Code Beautifier</h1>
       <p className="text-muted-foreground text-sm mb-4">
         Format code using Prettier. Supports JS, TS, CSS, HTML, JSON, YAML, Markdown, and GraphQL.
       </p>

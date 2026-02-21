@@ -21,11 +21,11 @@ interface OKLCH {
 
 // --- Color math utilities ---
 
-function clamp(value: number, min: number, max: number): number {
+export function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
 
-function hexToRgb(hex: string): RGB | null {
+export function hexToRgb(hex: string): RGB | null {
   const cleaned = hex.replace(/^#/, '');
   let fullHex = cleaned;
   if (fullHex.length === 3) {
@@ -39,13 +39,13 @@ function hexToRgb(hex: string): RGB | null {
   };
 }
 
-function rgbToHex(rgb: RGB): string {
+export function rgbToHex(rgb: RGB): string {
   const toHex = (n: number) =>
     clamp(Math.round(n), 0, 255).toString(16).padStart(2, '0');
   return `#${toHex(rgb.r)}${toHex(rgb.g)}${toHex(rgb.b)}`;
 }
 
-function rgbToHsl(rgb: RGB): HSL {
+export function rgbToHsl(rgb: RGB): HSL {
   const r = rgb.r / 255;
   const g = rgb.g / 255;
   const b = rgb.b / 255;
@@ -78,7 +78,7 @@ function rgbToHsl(rgb: RGB): HSL {
   };
 }
 
-function hslToRgb(hsl: HSL): RGB {
+export function hslToRgb(hsl: HSL): RGB {
   const h = hsl.h / 360;
   const s = hsl.s / 100;
   const l = hsl.l / 100;
@@ -109,7 +109,7 @@ function hslToRgb(hsl: HSL): RGB {
 }
 
 // Approximate RGB to OKLCH conversion
-function rgbToOklch(rgb: RGB): OKLCH {
+export function rgbToOklch(rgb: RGB): OKLCH {
   // Linear sRGB
   const toLinear = (c: number) => {
     const v = c / 255;
@@ -144,7 +144,7 @@ function rgbToOklch(rgb: RGB): OKLCH {
 }
 
 // Approximate OKLCH to RGB conversion
-function oklchToRgb(oklch: OKLCH): RGB {
+export function oklchToRgb(oklch: OKLCH): RGB {
   const L = oklch.l;
   const C = oklch.c;
   const H = (oklch.h * Math.PI) / 180;
@@ -180,7 +180,7 @@ function oklchToRgb(oklch: OKLCH): RGB {
 }
 
 // Relative luminance for WCAG contrast
-function relativeLuminance(rgb: RGB): number {
+export function relativeLuminance(rgb: RGB): number {
   const toLinear = (c: number) => {
     const v = c / 255;
     return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
@@ -188,7 +188,7 @@ function relativeLuminance(rgb: RGB): number {
   return 0.2126 * toLinear(rgb.r) + 0.7152 * toLinear(rgb.g) + 0.0722 * toLinear(rgb.b);
 }
 
-function contrastRatio(rgb1: RGB, rgb2: RGB): number {
+export function contrastRatio(rgb1: RGB, rgb2: RGB): number {
   const l1 = relativeLuminance(rgb1);
   const l2 = relativeLuminance(rgb2);
   const lighter = Math.max(l1, l2);
@@ -279,7 +279,6 @@ export default function ColorConverter() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold mb-1">Color Converter</h1>
         <p className="text-muted-foreground text-sm mb-4">
           Convert colors between HEX, RGB, HSL, and OKLCH. All processing happens in your browser.
         </p>

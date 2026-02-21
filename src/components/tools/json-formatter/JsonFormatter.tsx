@@ -86,7 +86,6 @@ export default function JsonFormatter() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-1">JSON Formatter & Validator</h1>
       <p className="text-muted-foreground text-sm mb-4">
         Format, validate, and minify JSON. All processing happens in your browser.
       </p>

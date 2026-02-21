@@ -61,7 +61,6 @@ export default function SqlFormatter() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-2">SQL Formatter</h1>
         <p className="text-muted-foreground">
           Format and beautify SQL queries with support for multiple dialects.
         </p>

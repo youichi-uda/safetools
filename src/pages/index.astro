@@ -1,12 +1,15 @@
 ---
 import LandingLayout from '@/layouts/LandingLayout.astro';
 import { tools } from '@/lib/tools-registry';
+import { getJsonLdWebSite } from '@/lib/seo';
+
+const jsonLd = getJsonLdWebSite();
 ---
 
 <LandingLayout seo={{
   title: 'SafeTools.dev - Developer Tools That Respect Your Privacy',
   description: 'Free online developer tools where your data never leaves your browser. JSON formatter, code beautifier, diff checker, and more. No server processing, no data collection.',
-}}>
+}} jsonLd={jsonLd}>
   <!-- Hero -->
   <section class="py-20 lg:py-32">
     <div class="mx-auto max-w-4xl px-4 text-center">

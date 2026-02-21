@@ -233,7 +233,6 @@ export default function ExifViewer() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">EXIF Viewer &amp; Stripper</h1>
         <p className="mt-2 text-muted-foreground">
           View hidden metadata in your photos and strip it before sharing. All processing
           happens entirely in your browser — your images never leave your device.

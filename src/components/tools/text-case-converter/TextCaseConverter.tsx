@@ -3,7 +3,7 @@ import CopyButton from '@/components/shared/CopyButton';
 
 const SAMPLE = `The quick brown fox jumps over the lazy dog. Hello World! this is a sample text for case conversion.`;
 
-function toWords(text: string): string[] {
+export function toWords(text: string): string[] {
   return text
     .replace(/([a-z])([A-Z])/g, '$1 $2')
     .replace(/([A-Z]+)([A-Z][a-z])/g, '$1 $2')
@@ -12,21 +12,21 @@ function toWords(text: string): string[] {
     .filter(Boolean);
 }
 
-function toUpperCase(text: string): string {
+export function toUpperCase(text: string): string {
   return text.toUpperCase();
 }
 
-function toLowerCase(text: string): string {
+export function toLowerCase(text: string): string {
   return text.toLowerCase();
 }
 
-function toTitleCase(text: string): string {
+export function toTitleCase(text: string): string {
   return text.replace(/\w\S*/g, (word) =>
     word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
   );
 }
 
-function toSentenceCase(text: string): string {
+export function toSentenceCase(text: string): string {
   return text
     .toLowerCase()
     .replace(/(^\s*|[.!?]\s+)([a-z])/g, (_, prefix, letter) =>
@@ -34,7 +34,7 @@ function toSentenceCase(text: string): string {
     );
 }
 
-function toCamelCase(text: string): string {
+export function toCamelCase(text: string): string {
   const words = toWords(text);
   if (words.length === 0) return '';
   return words
@@ -46,44 +46,44 @@ function toCamelCase(text: string): string {
     .join('');
 }
 
-function toPascalCase(text: string): string {
+export function toPascalCase(text: string): string {
   const words = toWords(text);
   return words
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
     .join('');
 }
 
-function toSnakeCase(text: string): string {
+export function toSnakeCase(text: string): string {
   return toWords(text)
     .map((w) => w.toLowerCase())
     .join('_');
 }
 
-function toScreamingSnakeCase(text: string): string {
+export function toScreamingSnakeCase(text: string): string {
   return toWords(text)
     .map((w) => w.toUpperCase())
     .join('_');
 }
 
-function toKebabCase(text: string): string {
+export function toKebabCase(text: string): string {
   return toWords(text)
     .map((w) => w.toLowerCase())
     .join('-');
 }
 
-function toDotCase(text: string): string {
+export function toDotCase(text: string): string {
   return toWords(text)
     .map((w) => w.toLowerCase())
     .join('.');
 }
 
-function toPathCase(text: string): string {
+export function toPathCase(text: string): string {
   return toWords(text)
     .map((w) => w.toLowerCase())
     .join('/');
 }
 
-function toReverseCase(text: string): string {
+export function toReverseCase(text: string): string {
   return text
     .split('')
     .map((c) => (c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()))
@@ -151,7 +151,6 @@ export default function TextCaseConverter() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold">Text Case Converter</h1>
         <p className="text-muted-foreground mt-1">
           Convert text between UPPER, lower, Title, camelCase, snake_case, kebab-case, and more. All processing happens in your browser.
         </p>

@@ -158,7 +158,6 @@ export default function MarkdownTableGenerator() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-2">Markdown Table Generator</h1>
         <p className="text-muted-foreground">
           Create Markdown tables visually. Edit cells, adjust column alignment, and copy the generated Markdown.
         </p>

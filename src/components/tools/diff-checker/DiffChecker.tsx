@@ -63,7 +63,6 @@ const message = greet("World", "Hi");`);
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-1">Diff Checker</h1>
       <p className="text-muted-foreground text-sm mb-4">
         Compare two texts and see differences. All processing happens in your browser.
       </p>

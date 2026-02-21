@@ -48,7 +48,6 @@ export default function MarkdownToHtml() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-2">Markdown to HTML</h1>
         <p className="text-muted-foreground">
           Convert Markdown to HTML with live preview. Choose between full document or fragment output.
         </p>

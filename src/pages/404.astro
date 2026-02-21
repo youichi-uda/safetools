@@ -1,0 +1,41 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+---
+
+<BaseLayout seo={{
+  title: 'Page Not Found - SafeTools.dev',
+  description: 'The page you\'re looking for doesn\'t exist or has been moved. Try our JSON Formatter or explore all available tools.',
+}}>
+  <div class="min-h-screen flex items-center justify-center px-4">
+    <div class="text-center">
+      <!-- Large 404 text -->
+      <div class="mb-8">
+        <span class="inline-block text-9xl font-bold text-muted-foreground opacity-50">404</span>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="text-4xl md:text-5xl font-bold mb-4">Page Not Found</h1>
+
+      <!-- Description -->
+      <p class="text-lg md:text-xl text-muted-foreground max-w-md mx-auto mb-8">
+        The page you're looking for doesn't exist or has been moved. Let's get you back on track.
+      </p>
+
+      <!-- Action buttons -->
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-primary text-primary-foreground font-medium hover:opacity-90 transition-opacity"
+        >
+          Go Home
+        </a>
+        <a
+          href="/tools/json-formatter"
+          class="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-border font-medium hover:bg-accent transition-colors"
+        >
+          Try JSON Formatter
+        </a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -157,7 +157,6 @@ export default function PasswordGenerator() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Password Generator</h1>
         <p className="mt-2 text-muted-foreground">
           Generate cryptographically secure passwords using the Web Crypto API. All generation
           happens entirely in your browser — your data never leaves your device.

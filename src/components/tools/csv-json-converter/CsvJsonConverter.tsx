@@ -6,7 +6,7 @@ import { json } from '@codemirror/lang-json';
 type Direction = 'csv-to-json' | 'json-to-csv';
 type Delimiter = ',' | '\t' | ';';
 
-function parseCsv(text: string, delimiter: string): string[][] {
+export function parseCsv(text: string, delimiter: string): string[][] {
   const rows: string[][] = [];
   let row: string[] = [];
   let field = '';
@@ -30,7 +30,7 @@ function parseCsv(text: string, delimiter: string): string[][] {
   return rows;
 }
 
-function escapeCsvField(field: string, delimiter: string): string {
+export function escapeCsvField(field: string, delimiter: string): string {
   const needsQuoting = field.includes(delimiter) || field.includes('"') || field.includes('\n') || field.includes('\r');
   if (needsQuoting) {
     return '"' + field.replace(/"/g, '""') + '"';
@@ -38,7 +38,7 @@ function escapeCsvField(field: string, delimiter: string): string {
   return field;
 }
 
-function jsonToCsv(jsonStr: string, delimiter: string): string {
+export function jsonToCsv(jsonStr: string, delimiter: string): string {
   const data = JSON.parse(jsonStr);
   if (!Array.isArray(data) || data.length === 0) {
     throw new Error('JSON must be an array of objects');
@@ -50,7 +50,7 @@ function jsonToCsv(jsonStr: string, delimiter: string): string {
   return [headers.map((h) => escapeCsvField(h, delimiter)).join(delimiter), ...rows].join('\n');
 }
 
-function csvToJson(csvStr: string, delimiter: string, hasHeader: boolean): string {
+export function csvToJson(csvStr: string, delimiter: string, hasHeader: boolean): string {
   const rows = parseCsv(csvStr, delimiter);
   if (rows.length === 0) return '[]';
 
@@ -149,7 +149,6 @@ export default function CsvJsonConverter() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">CSV &harr; JSON Converter</h1>
         <p className="mt-2 text-muted-foreground">
           Convert between CSV and JSON formats. RFC 4180 compliant parsing with support for
           quoted fields, embedded commas, and newlines. All processing happens in your browser.

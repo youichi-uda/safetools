@@ -74,7 +74,6 @@ export default function HtmlToMarkdown() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-2">HTML to Markdown</h1>
         <p className="text-muted-foreground">
           Convert HTML to Markdown with configurable heading style, code blocks, and GFM support.
         </p>

@@ -194,7 +194,6 @@ export default function ImageConverter() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Image Converter</h1>
         <p className="mt-2 text-muted-foreground">
           Convert images between PNG, JPEG, and WebP formats with optional resizing.
           All processing happens entirely in your browser using the Canvas API — your

@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import CopyButton from '@/components/shared/CopyButton';
 
-function generateUUID(): string {
+export function generateUUID(): string {
   if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
     return crypto.randomUUID();
   }
@@ -20,7 +20,7 @@ function generateUUID(): string {
   ].join('-');
 }
 
-function formatUUID(
+export function formatUUID(
   uuid: string,
   options: { uppercase: boolean; hyphens: boolean; braces: boolean }
 ): string {
@@ -108,7 +108,6 @@ export default function UuidGenerator() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">UUID Generator</h1>
         <p className="mt-2 text-muted-foreground">
           Generate RFC 4122 version 4 UUIDs. All generation happens entirely in your browser
           using the Web Crypto API — your data never leaves your device.

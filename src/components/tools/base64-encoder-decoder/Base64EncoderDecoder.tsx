@@ -121,7 +121,6 @@ export default function Base64EncoderDecoder() {
   return (
     <div className="space-y-4">
       <div>
-        <h1 className="text-2xl font-bold mb-1">Base64 Encoder / Decoder</h1>
         <p className="text-muted-foreground text-sm mb-4">
           Encode and decode Base64 strings and files. All processing happens in your browser.
         </p>

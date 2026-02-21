@@ -1,11 +1,11 @@
 import { useState, useCallback, useMemo } from 'react';
 import CopyButton from '@/components/shared/CopyButton';
 
-function ipToLong(ip: string): number {
+export function ipToLong(ip: string): number {
   return ip.split('.').reduce((acc, octet) => (acc << 8) + parseInt(octet, 10), 0) >>> 0;
 }
 
-function longToIp(long: number): string {
+export function longToIp(long: number): string {
   return [
     (long >>> 24) & 255,
     (long >>> 16) & 255,
@@ -14,7 +14,7 @@ function longToIp(long: number): string {
   ].join('.');
 }
 
-function isValidIp(ip: string): boolean {
+export function isValidIp(ip: string): boolean {
   const parts = ip.split('.');
   if (parts.length !== 4) return false;
   return parts.every((p) => {
@@ -23,7 +23,7 @@ function isValidIp(ip: string): boolean {
   });
 }
 
-function getIpClass(ip: string): string {
+export function getIpClass(ip: string): string {
   const first = parseInt(ip.split('.')[0], 10);
   if (first >= 0 && first <= 127) return 'A';
   if (first >= 128 && first <= 191) return 'B';
@@ -32,7 +32,7 @@ function getIpClass(ip: string): string {
   return 'E';
 }
 
-function getIpType(ip: string): string {
+export function getIpType(ip: string): string {
   const parts = ip.split('.').map(Number);
   if (parts[0] === 10) return 'Private';
   if (parts[0] === 172 && parts[1] >= 16 && parts[1] <= 31) return 'Private';
@@ -44,7 +44,7 @@ function getIpType(ip: string): string {
   return 'Public';
 }
 
-function calculate(ip: string, prefix: number) {
+export function calculate(ip: string, prefix: number) {
   const ipLong = ipToLong(ip);
   const mask = prefix === 0 ? 0 : (~0 << (32 - prefix)) >>> 0;
   const network = (ipLong & mask) >>> 0;

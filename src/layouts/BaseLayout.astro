@@ -12,6 +12,7 @@ interface Props {
 const { seo, jsonLd } = Astro.props;
 const canonicalURL = seo.canonical || new URL(Astro.url.pathname, Astro.site).toString();
 const ogImage = seo.ogImage || new URL('/og/default.png', Astro.site).toString();
+const ogImageAlt = seo.ogImageAlt || seo.title;
 ---
 
 <!doctype html>
@@ -23,6 +24,7 @@ const ogImage = seo.ogImage || new URL('/og/default.png', Astro.site).toString()
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={canonicalURL} />
     <meta name="robots" content="index, follow" />
 
@@ -34,6 +36,9 @@ const ogImage = seo.ogImage || new URL('/og/default.png', Astro.site).toString()
     <meta property="og:description" content={seo.description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta property="og:site_name" content="SafeTools.dev" />
     <meta property="og:locale" content="en_US" />
 
@@ -41,6 +46,7 @@ const ogImage = seo.ogImage || new URL('/og/default.png', Astro.site).toString()
     <meta name="twitter:title" content={seo.title} />
     <meta name="twitter:description" content={seo.description} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
     {jsonLd && <script type="application/ld+json" set:html={jsonLd} />}
 

@@ -303,7 +303,6 @@ export default function JsonToTypescript() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-2">JSON to TypeScript</h1>
         <p className="text-muted-foreground">
           Convert JSON data into TypeScript interfaces or type aliases. Handles nested objects,
           arrays, optional fields, and mixed types. All processing happens in your browser.

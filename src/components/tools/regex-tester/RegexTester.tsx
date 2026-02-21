@@ -134,7 +134,6 @@ export default function RegexTester() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold mb-1">Regex Tester</h1>
         <p className="text-muted-foreground text-sm mb-4">
           Test regular expressions with real-time matching and replace. All processing happens in your browser.
         </p>

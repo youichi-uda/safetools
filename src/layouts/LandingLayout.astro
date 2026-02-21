@@ -4,11 +4,12 @@ import type { SEOProps } from '@/lib/seo';
 
 interface Props {
   seo: SEOProps;
+  jsonLd?: string;
 }
 
-const { seo } = Astro.props;
+const { seo, jsonLd } = Astro.props;
 ---
 
-<BaseLayout seo={seo}>
+<BaseLayout seo={seo} jsonLd={jsonLd}>
   <slot />
 </BaseLayout>

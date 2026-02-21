@@ -115,7 +115,6 @@ export default function MarkdownPreview() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-2">Markdown Preview</h1>
         <p className="text-muted-foreground">
           Write or paste Markdown and see a live preview. Supports headings, lists, tables, code blocks, task lists, and more.
         </p>

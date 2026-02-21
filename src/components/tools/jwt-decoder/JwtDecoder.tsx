@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import CopyButton from '@/components/shared/CopyButton';
 
-function base64UrlDecode(str: string): string {
+export function base64UrlDecode(str: string): string {
   let base64 = str.replace(/-/g, '+').replace(/_/g, '/');
   const pad = base64.length % 4;
   if (pad) {
@@ -10,7 +10,7 @@ function base64UrlDecode(str: string): string {
   return atob(base64);
 }
 
-function tryParseJwt(token: string) {
+export function tryParseJwt(token: string) {
   const parts = token.trim().split('.');
   if (parts.length !== 3) {
     return { error: 'Invalid JWT: must have 3 dot-separated parts' };
@@ -26,7 +26,7 @@ function tryParseJwt(token: string) {
   }
 }
 
-function formatExpiration(exp: number) {
+export function formatExpiration(exp: number) {
   const now = Math.floor(Date.now() / 1000);
   const diff = exp - now;
   const expDate = new Date(exp * 1000);
@@ -53,7 +53,7 @@ function formatExpiration(exp: number) {
   }
 }
 
-function formatTimestamp(ts: number) {
+export function formatTimestamp(ts: number) {
   return new Date(ts * 1000).toUTCString();
 }
 
@@ -123,7 +123,6 @@ export default function JwtDecoder() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold mb-1">JWT Decoder</h1>
         <p className="text-muted-foreground text-sm mb-4">
           Decode and inspect JSON Web Tokens. All processing happens in your browser.
         </p>

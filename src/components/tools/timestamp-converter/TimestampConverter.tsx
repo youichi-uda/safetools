@@ -210,7 +210,6 @@ export default function TimestampConverter() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-1">Timestamp Converter</h1>
       <p className="text-muted-foreground text-sm mb-4">
         Convert between Unix timestamps and human-readable dates. All processing happens in your browser.
       </p>

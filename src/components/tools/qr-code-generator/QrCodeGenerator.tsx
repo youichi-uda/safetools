@@ -82,7 +82,6 @@ export default function QrCodeGenerator() {
     <div className="space-y-8">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">QR Code Generator</h1>
         <p className="mt-2 text-muted-foreground">
           Generate QR codes from any text or URL. All processing happens entirely in your browser
           — your data never leaves your device.

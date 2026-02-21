@@ -158,7 +158,6 @@ export default function LoremIpsumGenerator() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold mb-1">Lorem Ipsum Generator</h1>
       <p className="text-muted-foreground text-sm mb-4">
         Generate placeholder text for your designs and layouts. All processing happens in your browser.
       </p>

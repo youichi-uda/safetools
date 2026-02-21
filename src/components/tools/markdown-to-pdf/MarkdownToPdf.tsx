@@ -116,7 +116,6 @@ export default function MarkdownToPdf() {
   return (
     <div>
       <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-2">Markdown to PDF</h1>
         <p className="text-muted-foreground">
           Convert Markdown to PDF with customizable page size, margins, and font size. Preview before downloading.
         </p>
