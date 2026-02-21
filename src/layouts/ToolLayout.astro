@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import ToolSidebar from '@/components/layout/ToolSidebar.astro';
 import PrivacyBadge from '@/components/shared/PrivacyBadge.astro';
+import AdSlot from '@/components/shared/AdSlot.astro';
 import type { SEOProps } from '@/lib/seo';
 
 interface Props {
@@ -21,6 +22,9 @@ const { seo, jsonLd, currentSlug } = Astro.props;
         <PrivacyBadge />
       </div>
       <slot />
+      <div class="mt-8">
+        <AdSlot placement="content" />
+      </div>
     </div>
   </div>
 </BaseLayout>

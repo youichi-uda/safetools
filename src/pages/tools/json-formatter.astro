@@ -12,6 +12,7 @@ const jsonLd = getJsonLdWebApplication(tool);
   seo={{
     title: tool.metaTitle,
     description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.svg`,
   }}
   jsonLd={jsonLd}
   currentSlug={tool.slug}

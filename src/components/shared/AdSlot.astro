@@ -1,0 +1,37 @@
+---
+interface Props {
+  placement?: 'sidebar' | 'content';
+}
+
+const { placement = 'content' } = Astro.props;
+
+const maxWidth = placement === 'sidebar' ? 'max-w-[200px]' : 'max-w-[330px]';
+---
+
+<!--
+  Carbon Ads Integration
+  To activate:
+  1. Apply at https://www.carbonads.net/
+  2. Get your serve URL (e.g., //cdn.carbonads.com/carbon.js?serve=XXXXX&placement=safetoolsdev)
+  3. Uncomment the script tag below and add your serve URL
+  4. Remove the placeholder div
+-->
+
+<div id="carbonads" class:list={[maxWidth, 'w-full']}>
+  <!--
+    When approved by Carbon Ads, replace the placeholder below with:
+    <script
+      async
+      type="text/javascript"
+      src="//cdn.carbonads.com/carbon.js?serve=XXXXX&placement=safetoolsdev"
+      id="_carbonads_js">
+    </script>
+  -->
+  <div class:list={[
+    'border border-border bg-muted/30 text-muted-foreground rounded-md',
+    'flex items-center justify-center text-xs',
+    placement === 'sidebar' ? 'py-6' : 'py-4',
+  ]}>
+    Ad
+  </div>
+</div>

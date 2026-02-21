@@ -72,6 +72,13 @@ export default function UrlEncoderDecoder() {
 
   return (
     <div className="space-y-4">
+      <div>
+        <h1 className="text-2xl font-bold mb-1">URL Encoder / Decoder</h1>
+        <p className="text-muted-foreground text-sm mb-4">
+          Encode and decode URL components. All processing happens in your browser.
+        </p>
+      </div>
+
       {/* Controls row */}
       <div className="flex flex-wrap items-center gap-3">
         {/* Mode selector */}

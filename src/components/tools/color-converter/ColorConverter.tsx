@@ -278,6 +278,13 @@ export default function ColorConverter() {
 
   return (
     <div className="space-y-6">
+      <div>
+        <h1 className="text-2xl font-bold mb-1">Color Converter</h1>
+        <p className="text-muted-foreground text-sm mb-4">
+          Convert colors between HEX, RGB, HSL, and OKLCH. All processing happens in your browser.
+        </p>
+      </div>
+
       {/* Color preview swatch */}
       <div className="flex flex-col items-center gap-3">
         <div
