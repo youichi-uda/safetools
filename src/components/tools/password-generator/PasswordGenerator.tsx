@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import CopyButton from '@/components/shared/CopyButton';
 
 const UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -112,9 +112,11 @@ export default function PasswordGenerator() {
 
   const charOptions = { uppercase, lowercase, numbers, symbols };
 
-  const [currentPassword, setCurrentPassword] = useState<string>(() =>
-    generatePassword(16, { ...charOptions, exclude: '' })
-  );
+  const [currentPassword, setCurrentPassword] = useState<string>('');
+
+  useEffect(() => {
+    setCurrentPassword(generatePassword(16, { uppercase: true, lowercase: true, numbers: true, symbols: true, exclude: '' }));
+  }, []);
 
   const strength = calculateStrength(length, charOptions);
 

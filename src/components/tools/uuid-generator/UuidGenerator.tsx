@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import CopyButton from '@/components/shared/CopyButton';
 
 export function generateUUID(): string {
@@ -38,7 +38,11 @@ export function formatUUID(
 }
 
 export default function UuidGenerator() {
-  const [currentUUID, setCurrentUUID] = useState<string>(generateUUID());
+  const [currentUUID, setCurrentUUID] = useState<string>('');
+
+  useEffect(() => {
+    setCurrentUUID(generateUUID());
+  }, []);
   const [bulkCount, setBulkCount] = useState<number>(5);
   const [bulkUUIDs, setBulkUUIDs] = useState<string[]>([]);
   const [history, setHistory] = useState<string[]>([]);

@@ -69,7 +69,7 @@ export default function TimestampConverter() {
   const [unit, setUnit] = useState<TimestampUnit>('seconds');
   const [parsedDate, setParsedDate] = useState<Date | null>(null);
   const [error, setError] = useState('');
-  const [currentTime, setCurrentTime] = useState(new Date());
+  const [currentTime, setCurrentTime] = useState<Date | null>(null);
   const [dateParts, setDateParts] = useState<DateParts>({
     year: '',
     month: '',
@@ -80,8 +80,9 @@ export default function TimestampConverter() {
   });
   const [dateTimezone, setDateTimezone] = useState<'utc' | 'local'>('utc');
 
-  // Live clock
+  // Live clock — initialize on client to avoid hydration mismatch
   useEffect(() => {
+    setCurrentTime(new Date());
     const interval = setInterval(() => setCurrentTime(new Date()), 1000);
     return () => clearInterval(interval);
   }, []);
@@ -195,8 +196,8 @@ export default function TimestampConverter() {
     [unit, parseTimestamp],
   );
 
-  const currentTimestampSeconds = Math.floor(currentTime.getTime() / 1000);
-  const currentTimestampMs = currentTime.getTime();
+  const currentTimestampSeconds = currentTime ? Math.floor(currentTime.getTime() / 1000) : 0;
+  const currentTimestampMs = currentTime ? currentTime.getTime() : 0;
 
   const inputClass =
     'w-full px-3 py-1.5 text-sm rounded-md border border-border bg-background focus:outline-none focus:ring-2 focus:ring-ring';
@@ -230,11 +231,11 @@ export default function TimestampConverter() {
           </div>
           <div className="sm:col-span-2">
             <span className="text-muted-foreground">UTC: </span>
-            <span className="font-mono">{currentTime.toUTCString()}</span>
+            <span className="font-mono">{currentTime ? currentTime.toUTCString() : ''}</span>
           </div>
           <div className="sm:col-span-2">
             <span className="text-muted-foreground">Local: </span>
-            <span className="font-mono">{formatDate(currentTime, 'local')}</span>
+            <span className="font-mono">{currentTime ? formatDate(currentTime, 'local') : ''}</span>
           </div>
         </div>
       </div>
