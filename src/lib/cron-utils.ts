@@ -167,6 +167,66 @@ export function getNextRuns(expression: string, count: number): Date[] {
   return runs;
 }
 
+const SYSTEMD_DOW = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+function convertDowToken(token: string): string {
+  if (token === '*') return '';
+  if (token.includes('-')) {
+    const [start, end] = token.split('-').map(Number);
+    return `${SYSTEMD_DOW[start]}..${SYSTEMD_DOW[end]}`;
+  }
+  if (token.includes(',')) {
+    return token.split(',').map((v) => SYSTEMD_DOW[parseInt(v, 10)]).join(',');
+  }
+  if (token.startsWith('*/')) {
+    // systemd doesn't support */N for dow directly; expand it
+    const interval = parseInt(token.slice(2), 10);
+    const days: string[] = [];
+    for (let i = 0; i <= 6; i += interval) {
+      days.push(SYSTEMD_DOW[i]);
+    }
+    return days.join(',');
+  }
+  return SYSTEMD_DOW[parseInt(token, 10)] || token;
+}
+
+function convertTimeToken(token: string, isMinuteOrHour: boolean): string {
+  if (token === '*') return '*';
+  if (token.startsWith('*/')) {
+    const interval = token.slice(2);
+    return isMinuteOrHour ? `00/${interval}` : `*/${interval}`;
+  }
+  if (token.includes('-')) {
+    const [start, end] = token.split('-');
+    return `${start}..${end}`;
+  }
+  if (token.includes(',')) return token;
+  // Single value — zero-pad for minute/hour
+  if (isMinuteOrHour) return token.padStart(2, '0');
+  return token;
+}
+
+export function cronToOnCalendar(expression: string): string | null {
+  const parts = expression.trim().split(/\s+/);
+  if (parts.length !== 5) return null;
+
+  const [minToken, hourToken, domToken, monthToken, dowToken] = parts;
+
+  const dow = convertDowToken(dowToken);
+  const month = convertTimeToken(monthToken, false);
+  const dom = convertTimeToken(domToken, false);
+  const hour = convertTimeToken(hourToken, true);
+  const minute = convertTimeToken(minToken, true);
+
+  const datePart = `${month === '*' ? '*' : month}-${dom === '*' ? '*' : dom}`;
+  const timePart = `${hour}:${minute}:00`;
+
+  if (dow) {
+    return `${dow} *-${datePart} ${timePart}`;
+  }
+  return `*-${datePart} ${timePart}`;
+}
+
 export function getFieldDescription(index: number, token: string): string {
   const config = FIELD_CONFIGS[index];
   if (token === '*') return `Every ${config.label.toLowerCase()}`;

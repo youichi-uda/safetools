@@ -421,6 +421,16 @@ export const tools: Tool[] = [
     metaDescription: 'Batch strip EXIF metadata from multiple images. Remove GPS and private data. Your data never leaves your browser.',
   },
   {
+    slug: 'cron-to-systemd',
+    name: 'Cron → systemd.timer Converter',
+    shortName: 'Cron → systemd',
+    description: 'Convert cron expressions to systemd timer unit files. Generate .timer and .service files with OnCalendar schedules.',
+    category: 'Converters',
+    icon: '⏲',
+    metaTitle: 'Cron to systemd.timer Converter - SafeTools.dev',
+    metaDescription: 'Convert cron expressions to systemd timer OnCalendar format and generate .timer/.service unit files. Your data never leaves your browser.',
+  },
+  {
     slug: 'json-schema-validator',
     name: 'JSON Schema Validator',
     shortName: 'Schema Valid.',

@@ -1,0 +1,37 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import CronToSystemd from '@/components/tools/cron-to-systemd/CronToSystemd';
+
+const tool = getToolBySlug('cron-to-systemd')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <CronToSystemd client:load />
+
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Cron → systemd.timer?</h2>
+    <p class="text-muted-foreground mb-4">This tool converts standard 5-field cron expressions into systemd timer unit files. It generates the <code>OnCalendar</code> value, a complete <code>.timer</code> unit file, a <code>.service</code> template, and the shell commands to install them.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Enter a cron expression or select a preset</li>
+      <li>Optionally change the timer/service name and toggle Persistent mode</li>
+      <li>Copy the generated <code>.timer</code> and <code>.service</code> files</li>
+      <li>Use the provided shell commands to install and enable the timer</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. No data is sent to any server.</p>
+  </section>
+</ToolLayout>
