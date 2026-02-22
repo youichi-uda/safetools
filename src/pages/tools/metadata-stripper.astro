@@ -1,0 +1,37 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import MetadataStripper from '@/components/tools/metadata-stripper/MetadataStripper';
+
+const tool = getToolBySlug('metadata-stripper')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <MetadataStripper client:load />
+
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Image Metadata Stripper?</h2>
+    <p class="text-muted-foreground mb-4">Image Metadata Stripper removes EXIF and other metadata from multiple images at once. Strip GPS coordinates, camera information, and other private data before sharing photos online.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Drop or select multiple images</li>
+      <li>Review detected metadata for each image</li>
+      <li>Strip metadata from individual files or all at once</li>
+      <li>Download cleaned images individually or all at once</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser using the Canvas API. Your images are never uploaded to any server.</p>
+  </section>
+</ToolLayout>

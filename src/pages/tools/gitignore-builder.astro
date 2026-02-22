@@ -1,0 +1,37 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import GitignoreBuilder from '@/components/tools/gitignore-builder/GitignoreBuilder';
+
+const tool = getToolBySlug('gitignore-builder')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <GitignoreBuilder client:load />
+
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is .gitignore Builder?</h2>
+    <p class="text-muted-foreground mb-4">.gitignore Builder helps you create comprehensive .gitignore files by selecting from curated templates for popular languages, frameworks, IDEs, and operating systems. Templates are merged with deduplication.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Search or browse available templates by category</li>
+      <li>Click templates to add them to your .gitignore</li>
+      <li>Add custom rules in the custom rules textarea</li>
+      <li>Copy or download the generated .gitignore file</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. No data is sent to any server.</p>
+  </section>
+</ToolLayout>

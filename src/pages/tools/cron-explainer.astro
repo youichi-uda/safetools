@@ -1,0 +1,37 @@
+---
+import ToolLayout from '@/layouts/ToolLayout.astro';
+import { getJsonLdWebApplication } from '@/lib/seo';
+import { getToolBySlug } from '@/lib/tools-registry';
+import CronExplainer from '@/components/tools/cron-explainer/CronExplainer';
+
+const tool = getToolBySlug('cron-explainer')!;
+const jsonLd = getJsonLdWebApplication(tool);
+---
+
+<ToolLayout
+  seo={{
+    title: tool.metaTitle,
+    description: tool.metaDescription,
+    ogImage: `https://safetools.dev/og/${tool.slug}.png`,
+  }}
+  jsonLd={jsonLd}
+  currentSlug={tool.slug}
+>
+  <CronExplainer client:load />
+
+  <section class="mt-16 pt-8 border-t border-border prose prose-sm dark:prose-invert max-w-none">
+    <h2 class="text-xl font-bold mb-4">What is Cron Explainer?</h2>
+    <p class="text-muted-foreground mb-4">Cron Explainer translates cron expressions into plain English. Paste any 5-field cron expression to see a human-readable description, a field-by-field breakdown, and the next scheduled execution times.</p>
+
+    <h2 class="text-xl font-bold mb-4">How to Use</h2>
+    <ol class="list-decimal list-inside space-y-2 text-muted-foreground mb-4">
+      <li>Paste or type a cron expression (e.g., <code>0 9 * * 1-5</code>)</li>
+      <li>Read the human-readable description and field-by-field breakdown</li>
+      <li>Check the next scheduled run times to verify the schedule</li>
+      <li>Try common presets to quickly explore common schedules</li>
+    </ol>
+
+    <h2 class="text-xl font-bold mb-4">Privacy & Security</h2>
+    <p class="text-muted-foreground">All processing happens entirely in your browser. No data is sent to any server.</p>
+  </section>
+</ToolLayout>

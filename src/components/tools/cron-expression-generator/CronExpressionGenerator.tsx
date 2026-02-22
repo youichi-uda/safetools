@@ -1,5 +1,7 @@
 import { useState, useCallback, useMemo } from 'react';
 import CopyButton from '@/components/shared/CopyButton';
+import { FIELD_CONFIGS, generateDescription, getNextRuns } from '@/lib/cron-utils';
+import type { FieldConfig } from '@/lib/cron-utils';
 
 type FieldMode = 'every' | 'specific' | 'range' | 'interval';
 
@@ -11,31 +13,6 @@ interface FieldState {
   interval: number;
 }
 
-interface FieldConfig {
-  label: string;
-  min: number;
-  max: number;
-  names?: string[];
-}
-
-const FIELD_CONFIGS: FieldConfig[] = [
-  { label: 'Minute', min: 0, max: 59 },
-  { label: 'Hour', min: 0, max: 23 },
-  { label: 'Day of Month', min: 1, max: 31 },
-  {
-    label: 'Month',
-    min: 1,
-    max: 12,
-    names: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-  },
-  {
-    label: 'Day of Week',
-    min: 0,
-    max: 6,
-    names: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-  },
-];
-
 const PRESETS: { label: string; expression: string }[] = [
   { label: 'Every minute', expression: '* * * * *' },
   { label: 'Every 5 minutes', expression: '*/5 * * * *' },
@@ -44,13 +21,6 @@ const PRESETS: { label: string; expression: string }[] = [
   { label: 'Every Monday at 9 AM', expression: '0 9 * * 1' },
   { label: 'Monthly on the 1st', expression: '0 0 1 * *' },
 ];
-
-const MONTH_NAMES = [
-  '', 'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December',
-];
-
-const DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 function defaultField(config: FieldConfig): FieldState {
   return {
@@ -85,7 +55,6 @@ function parseFieldFromExpression(token: string, config: FieldConfig): FieldStat
     return field;
   }
 
-  // Interval: */N
   if (token.startsWith('*/')) {
     const n = parseInt(token.slice(2), 10);
     if (!isNaN(n) && n > 0) {
@@ -95,7 +64,6 @@ function parseFieldFromExpression(token: string, config: FieldConfig): FieldStat
     }
   }
 
-  // Range: A-B
   if (token.includes('-') && !token.includes(',')) {
     const [a, b] = token.split('-').map(Number);
     if (!isNaN(a) && !isNaN(b)) {
@@ -106,7 +74,6 @@ function parseFieldFromExpression(token: string, config: FieldConfig): FieldStat
     }
   }
 
-  // Specific: 1,2,3
   if (token.includes(',') || /^\d+$/.test(token)) {
     const values = token.split(',').map(Number).filter((n) => !isNaN(n));
     if (values.length > 0) {
@@ -117,135 +84,6 @@ function parseFieldFromExpression(token: string, config: FieldConfig): FieldStat
   }
 
   return field;
-}
-
-function generateDescription(expression: string): string {
-  const parts = expression.trim().split(/\s+/);
-  if (parts.length !== 5) return 'Invalid cron expression';
-
-  const [minute, hour, dom, month, dow] = parts;
-
-  // Every minute
-  if (minute === '*' && hour === '*' && dom === '*' && month === '*' && dow === '*') {
-    return 'Every minute';
-  }
-
-  // Interval on minutes only
-  if (minute.startsWith('*/') && hour === '*' && dom === '*' && month === '*' && dow === '*') {
-    const n = parseInt(minute.slice(2), 10);
-    return `Every ${n} minute${n !== 1 ? 's' : ''}`;
-  }
-
-  const segments: string[] = [];
-
-  // Time part
-  if (minute !== '*' && hour !== '*') {
-    segments.push(`at ${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`);
-  } else if (minute !== '*' && hour === '*') {
-    segments.push(`every hour at minute ${minute}`);
-  } else if (minute === '*' && hour !== '*') {
-    segments.push(`every minute during hour ${hour}`);
-  }
-
-  // Day of week
-  if (dow !== '*') {
-    const dayValues = dow.split(',').map(Number);
-    const dayStr = dayValues.map((d) => DAY_NAMES[d] || `day ${d}`).join(', ');
-    segments.unshift(`Every ${dayStr}`);
-  }
-
-  // Day of month
-  if (dom !== '*') {
-    if (dow === '*') {
-      segments.unshift(`On day ${dom} of the month`);
-    } else {
-      segments.push(`and day ${dom} of the month`);
-    }
-  }
-
-  // Month
-  if (month !== '*') {
-    const monthValues = month.split(',').map(Number);
-    const monthStr = monthValues.map((m) => MONTH_NAMES[m] || `month ${m}`).join(', ');
-    segments.push(`in ${monthStr}`);
-  }
-
-  // Fallback: if only minute is set (e.g. "0 * * * *")
-  if (segments.length === 0) {
-    if (minute !== '*') {
-      return `Every hour at minute ${minute}`;
-    }
-    return 'Every minute';
-  }
-
-  // If no day context was added and it's daily
-  if (dow === '*' && dom === '*' && month === '*' && segments.length > 0) {
-    // Prepend "Every day" if we only have a time segment
-    if (!segments[0].startsWith('Every') && !segments[0].startsWith('On')) {
-      segments.unshift('Every day');
-    }
-  }
-
-  // Monthly shortcut
-  if (dom !== '*' && dow === '*' && month === '*' && hour !== '*' && minute !== '*') {
-    return `Monthly on day ${dom} at ${hour.padStart(2, '0')}:${minute.padStart(2, '0')}`;
-  }
-
-  let result = segments.join(' ');
-  return result.charAt(0).toUpperCase() + result.slice(1);
-}
-
-function matchesCronField(value: number, token: string): boolean {
-  if (token === '*') return true;
-
-  if (token.startsWith('*/')) {
-    const interval = parseInt(token.slice(2), 10);
-    return value % interval === 0;
-  }
-
-  if (token.includes('-')) {
-    const [start, end] = token.split('-').map(Number);
-    return value >= start && value <= end;
-  }
-
-  if (token.includes(',')) {
-    return token.split(',').map(Number).includes(value);
-  }
-
-  return value === parseInt(token, 10);
-}
-
-function getNextRuns(expression: string, count: number): Date[] {
-  const parts = expression.trim().split(/\s+/);
-  if (parts.length !== 5) return [];
-
-  const [minToken, hourToken, domToken, monthToken, dowToken] = parts;
-  const runs: Date[] = [];
-  const now = new Date();
-  const current = new Date(now.getFullYear(), now.getMonth(), now.getDate(), now.getHours(), now.getMinutes() + 1, 0, 0);
-
-  const maxIterations = 525600; // 1 year of minutes
-
-  for (let i = 0; i < maxIterations && runs.length < count; i++) {
-    const candidate = new Date(current.getTime() + i * 60000);
-    const min = candidate.getMinutes();
-    const hr = candidate.getHours();
-    const dom = candidate.getDate();
-    const mon = candidate.getMonth() + 1; // 1-12
-    const dow = candidate.getDay(); // 0-6
-
-    if (
-      matchesCronField(min, minToken) &&
-      matchesCronField(hr, hourToken) &&
-      matchesCronField(dom, domToken) &&
-      matchesCronField(mon, monthToken) &&
-      matchesCronField(dow, dowToken)
-    ) {
-      runs.push(candidate);
-    }
-  }
-
-  return runs;
 }
 
 function FieldEditor({
